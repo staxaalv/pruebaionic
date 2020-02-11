@@ -17,10 +17,21 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: ' Ver Mapa',
+      url: '/mapa',
+      icon: 'map'
+    },
+    {
+      title: 'Comprar Producto',
+      url: '/login',
+      icon: 'cart'
+    },
+    {
+      title: 'Cerrar Sesion',
+      url: '/login',
+      icon: 'log-out'
     }
+    
   ];
 
   constructor(
