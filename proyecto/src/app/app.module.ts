@@ -14,6 +14,9 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "./../environments/environment";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 
+import { CartModalPageModule } from "./pages/cart-modal/cart-modal.module";
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,7 +26,8 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    CartModalPageModule
   ],
   providers: [
     StatusBar,
