@@ -1,9 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title text-center>Registrarse</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+
+<ion-content padding>
+  <ion-item>
+    <!--<img class="icon" src="assets/icon/chat_icon.svg" alt="">-->
+  </ion-item>
+  <ion-item>
+  <ion-label position="floating" > Nombre</ion-label>
+  <ion-input type="text" name="nombre"></ion-input>  
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating" > Apellido</ion-label>
+    <ion-input type="text" name="apellido"></ion-input>  
+  </ion-item>
+
+
+<ion-item>
+  <ion-label position="floating" > Correo electrónico</ion-label>
+  <ion-input type="text" [(ngModel)]="user.email" name="email"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label position="floating" > Contraseña</ion-label>
+  <ion-input [(ngModel)]="user.password" type="password" name="password"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-button (click)="onRegister()" expand="block">Registrarse</ion-button>
+</ion-item>
+<ion-item>
+  <ion-button routerLink="/login" expand="block">Inciar Sesion</ion-button>
+</ion-item>
+
 
 </ion-content>
