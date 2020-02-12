@@ -12,7 +12,7 @@
     </ion-list-header>
 
     <ion-item *ngFor="let categoria of categorias">
-      <ion-thumbnail slot="start" (click)="goReciver(categoria)" ><!--(click)="pasarAProductos(categoria)">-->
+      <ion-thumbnail slot="start"  ><!-- (click)="goReciver(categoria)    (click)="pasarAProductos(categoria)">-->
         <img [src]="categoria.imagen">
       </ion-thumbnail>
       <ion-label>{{categoria.nombre}}</ion-label>

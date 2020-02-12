@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CategoriaService } from "../../services/categoria.service";
 import { Category } from "../../shared/category.interface"; 
-import { EnviarObjetoService } from "../../services/enviar-objeto.service";
+//import { EnviarObjetoService } from "../../services/enviar-objeto.service";
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class CategoriaPage implements OnInit {
   public categorias:Category[];
 
-  constructor(private categoriaService:CategoriaService,private router:Router, private enviarObjService:EnviarObjetoService) { }
+  constructor(private categoriaService:CategoriaService,private router:Router,/* private enviarObjService:EnviarObjetoService*/) { }
 
   ngOnInit() {
     this.categoriaService.getCategorias().subscribe(
@@ -22,10 +22,10 @@ export class CategoriaPage implements OnInit {
       });
   }
 
-  public goReciver(x:any){
+  /*public goReciver(x:any){
     this.enviarObjService.sendObjectSource(x);
     //this.enviarObjService.sendListSource(this.list);
     this.router.navigate(['/productos']);
-  }
+  }*/
 
 }
