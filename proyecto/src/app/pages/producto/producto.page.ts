@@ -5,6 +5,7 @@ import { CartService } from "../../services/cart.service";
 import { ModalController } from '@ionic/angular';
 import { CartModalPage } from '../../pages/cart-modal/cart-modal.page';
 import { BehaviorSubject } from 'rxjs';
+import { ProductoService } from "../../services/producto.service";
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.page.html',
@@ -12,7 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProductoPage implements OnInit {
   /////
-  id:Category;
+  id:any;
   sub:any;
   ////
 
@@ -25,7 +26,8 @@ export class ProductoPage implements OnInit {
   
   
   constructor(private activatedRouted:ActivatedRoute,
-    private cartService: CartService, private modalCtrl: ModalController
+    private cartService: CartService, private modalCtrl: ModalController,
+    private productoService:ProductoService
     ) { }
   
   ngOnInit() {
@@ -33,11 +35,16 @@ export class ProductoPage implements OnInit {
     this.sub=this.activatedRouted.snapshot.paramMap.get('id');
     /*this.sub = this.activatedRouted.params.subscribe(params => {
       this.id = params['id'];});*/
-    console.log("idn: "+this.sub);
+    console.log("idCategoria en Producto: "+this.sub);
+    this.productoService.inService(this.id);
+
+    
 
     this.products = this.cartService.getProducts();
     this.cart = this.cartService.getCart();
     this.cartItemCount = this.cartService.getCartItemCount();
+
+    console.log(this.productoService.getProdutos());
   }
 
   addToCart(product) {
