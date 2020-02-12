@@ -31,7 +31,7 @@ export class CategoriaService {
   getCategorias(){
     return this.categorias;
   }
-  getCateoria(id:string){
+  getCategoria(id:string){
     return this.categoriaCollection.doc<Category>(id).valueChanges();
   }
 

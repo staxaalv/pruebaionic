@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NavController } from '@ionic/angular';
+import { Geolocation, Geoposition, GeolocationOptions } from '@ionic-native/geolocation/ngx';
 declare var google;
 
 interface Marker {
@@ -19,17 +20,30 @@ interface Marker {
 export class MapaPage implements OnInit {
   map=null;
 
-  constructor() { }
+  lat:number
+  lon:number
+  total:string
+
+  constructor(private navController:NavController, private geolocation:Geolocation) { }
 
   ngOnInit() {
+    this.getGeolocation();
     this.loadMap();
+    console.log("latitud: "+this.lat+"    longitud: "+this.lon)
   }
   
+
+  getGeolocation(){
+    this.geolocation.getCurrentPosition().then((geoposition: Geoposition)=>{
+      this.lat = geoposition.coords.latitude;
+      this.lon = geoposition.coords.longitude;
+    });
+  }
   loadMap() {
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('map');
     // create LatLng object
-    const myLatLng = {lat: 4.658383846282959, lng: -74.09394073486328};
+    const myLatLng = {lat: this.lat, lng: this.lon};
     // create map
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
@@ -37,13 +51,12 @@ export class MapaPage implements OnInit {
     });
   
     google.maps.event.addListenerOnce(this.map, 'idle', () => {
-      //this.renderMarkers();
       mapEle.classList.add('show-map');
 
       const marker={
         position:{
-          lat:4.658383846282959,
-          lng:-74.09394073486328
+          lat:this.lat,
+          lng:this.lon
         },
         title:"punto 1"
       };

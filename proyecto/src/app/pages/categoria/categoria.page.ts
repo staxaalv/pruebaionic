@@ -43,9 +43,7 @@ export class CategoriaPage implements OnInit {
   }*/
 
   goToProductDetails(id:Category) {
-    console.log(id)
+    console.log(id);
     this.router.navigate(['/producto', id]);
   }
-
-
 }

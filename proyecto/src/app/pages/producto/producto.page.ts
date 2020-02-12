@@ -15,7 +15,7 @@ export class ProductoPage implements OnInit {
   id:Category;
   sub:any;
   ////
-  
+
   cart = [];
   products = [];
   cartItemCount: BehaviorSubject<number>;
@@ -30,9 +30,10 @@ export class ProductoPage implements OnInit {
   
   ngOnInit() {
     ///
-    this.sub = this.activatedRouted.params.subscribe(params => {
-      this.id = params['id'];});
-    console.log("id: "+this.id);
+    this.sub=this.activatedRouted.snapshot.paramMap.get('id');
+    /*this.sub = this.activatedRouted.params.subscribe(params => {
+      this.id = params['id'];});*/
+    console.log("idn: "+this.sub);
 
     this.products = this.cartService.getProducts();
     this.cart = this.cartService.getCart();

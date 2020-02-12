@@ -16,6 +16,7 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 import { CartModalPageModule } from "./pages/cart-modal/cart-modal.module";
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,12 +28,14 @@ import { CartModalPageModule } from "./pages/cart-modal/cart-modal.module";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    CartModalPageModule
+    CartModalPageModule,
+
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Geolocation
   ],
   bootstrap: [AppComponent]
 })
