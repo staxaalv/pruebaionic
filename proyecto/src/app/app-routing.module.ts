@@ -32,10 +32,6 @@ const routes: Routes = [
   },
   {
     path: 'categoria',
-    loadChildren: () => import('./categoria/categoria.module').then( m => m.CategoriaPageModule)
-  },
-  {
-    path: 'categoria',
     loadChildren: () => import('./pages/categoria/categoria.module').then( m => m.CategoriaPageModule)
   }
 ];
