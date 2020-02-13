@@ -7,7 +7,7 @@ export class CartService {
  
   private data = [
     {
-      category: 'Pizza',
+      category: 'bebida',
       products: [
         { id: 0, name: 'ejemplo1', price: '8' },
         { id: 1, name: 'ejemplo1', price: '5' },
@@ -16,14 +16,14 @@ export class CartService {
       ]
     },
     {
-      category: 'Pasta',
+      category: 'computador',
       products: [
         { id: 4, name: 'ejemplo2', price: '8' },
         { id: 5, name: 'ejemplo2', price: '6' }
       ]
     },
     {
-      category: 'Salad',
+      category: 'celular',
       products: [
         { id: 6, name: 'ejemplo3', price: '8' },
         { id: 7, name: 'ejemplo3', price: '5' },

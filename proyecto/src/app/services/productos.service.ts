@@ -12,44 +12,24 @@ import { element } from 'protractor';
   providedIn: 'root'
 })
 export class ProductosService {
-  private datos=[];
   private productoCollection: AngularFirestoreCollection<Producto>;
   private productos: Observable<Producto[]>;
-  private categorias:Observable<Category[]>;
-  
-  private lp=[];
-  
-  constructor(public categoriaService:CategoriaService,private db:AngularFirestore) { 
-    this.categorias=this.categoriaService.getCategorias();
-    
-    //db.collection('families').where('users_exists.john', '==', true)
-    
-    //this.productoCollection= db.collection<Producto>('elementos');
+
+
+  constructor(private db:AngularFirestore) {  
+    this.productoCollection= db.collection<Producto>('elementos');
     this.productos=this.productoCollection.snapshotChanges().pipe(map(
       acctions =>{
         return acctions.map(a =>{
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
           return {id,...data};
-          });
-        }
-      ));
-        
-        let queryRef=conec.
-      
+        });
+      }
+    ));
     
-    
-
-
-  
-
     
   }
-
-  devuelvelistaformada(){
-    return this.datos;
-  }
-
 
   getProductos(){
     return this.productos;
@@ -57,5 +37,6 @@ export class ProductosService {
   getProducto(id:string){
     return this.productoCollection.doc<Producto>(id).valueChanges();
   }
+
 }
 
