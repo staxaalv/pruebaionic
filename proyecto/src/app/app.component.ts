@@ -30,6 +30,11 @@ export class AppComponent {
       title: 'Cerrar Sesion',
       url: '/login',
       icon: 'log-out'
+    },
+    {
+      title: 'PruebaFirebase',
+      url: '/categoria',
+      icon: 'google'
     }
     
   ];

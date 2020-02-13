@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>My Cart</ion-title>
+    <ion-title>Factura</ion-title>
   </ion-toolbar>
 </ion-header>
  
@@ -13,8 +13,19 @@
       {{ item.count }}x {{ item.name }} - {{ item.price | currency:'USD':'symbol' }}
       <ion-label slot="end" text-right>{{ (item.price * item.count) | currency:'USD':'symbol' }}</ion-label>
     </ion-item>
-    <ion-item>
-      Total: <span slot="end">{{ total | currency:'USD':'symbol' }}</span>
-    </ion-item>
+   
   </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-item>
+    Total: <span slot="end">{{ total | currency:'USD':'symbol' }}</span>
+  </ion-item>
+  <ion-item>
+    Descuento:<span slot="end">{{ total | currency:'USD':'symbol' }}</span>
+  </ion-item>
+  <ion-item text-center>
+    <ion-button >
+      Subir Factura
+    </ion-button>
+  </ion-item>
+</ion-footer>

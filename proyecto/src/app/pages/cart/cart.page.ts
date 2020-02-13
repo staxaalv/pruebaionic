@@ -16,20 +16,17 @@ export class CartPage implements OnInit {
     centeredSlides: true
   };
 
-  categorias=[];
+  
  
-  constructor(private router: Router, private cartService: CartService,private productoServices:ProductosService) { }
+  constructor(private router: Router, private cartService: CartService, private productosServices:ProductosService ) { }
  
   ngOnInit() {
     this.items = this.cartService.getProducts();
     this.cart = this.cartService.getCart();
 
-    this.productoServices.getProductos().subscribe(
-      res =>{
-        this.categorias = res;
-      });
+    console.log(this.productosServices.getCategorias());
+
     
-      console.log(this.categorias);
   }
  
   addToCart(product) {

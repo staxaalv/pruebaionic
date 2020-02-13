@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AngularFireModule } from "@angular/fire";
+//import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "./../environments/environment";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
@@ -17,6 +17,8 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+
+import { AngularFireModule } from "angularfire2";
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -26,7 +28,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule,
+    AngularFirestoreModule
   ],
   providers: [
     StatusBar,

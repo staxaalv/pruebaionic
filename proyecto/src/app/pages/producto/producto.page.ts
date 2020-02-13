@@ -7,7 +7,7 @@ import { CartService } from "../../services/cart.service";
 })
 export class ProductoPage implements OnInit {
   selectedItems = [];
- 
+ public dscPorcentaje=0;
   total = 0;
  
   constructor(private cartService: CartService) { }
@@ -24,6 +24,11 @@ export class ProductoPage implements OnInit {
     }
     this.selectedItems = Object.keys(selected).map(key => selected[key])
     this.total = this.selectedItems.reduce((a, b) => a + (b.count * b.price), 0);
+    this.dscPorcentaje=this.randomInt(0,30);
   }
+
+  randomInt(min, max){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+ }
  
 }
