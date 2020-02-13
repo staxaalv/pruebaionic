@@ -23,7 +23,7 @@ export class AppComponent {
     },
     {
       title: 'Comprar Producto',
-      url: '/categoria',
+      url: '/cart',
       icon: 'cart'
     },
     {

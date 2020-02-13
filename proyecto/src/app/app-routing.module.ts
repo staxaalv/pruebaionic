@@ -31,21 +31,17 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
+    path: 'categoria',
+    loadChildren: () => import('./pages/categoria/categoria.module').then( m => m.CategoriaPageModule)
+  },  {
+    path: 'cart',
+    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+  },
+  {
     path: 'producto',
     loadChildren: () => import('./pages/producto/producto.module').then( m => m.ProductoPageModule)
   },
-  {
-    path: 'producto/:id',
-    loadChildren: () => import('./pages/producto/producto.module').then( m => m.ProductoPageModule)
-  },
-  {
-    path: 'cart-modal',
-    loadChildren: () => import('./pages/cart-modal/cart-modal.module').then( m => m.CartModalPageModule)
-  },
-  {
-    path: 'categoria',
-    loadChildren: () => import('./pages/categoria/categoria.module').then( m => m.CategoriaPageModule)
-  },
+
 ];
 
 @NgModule({

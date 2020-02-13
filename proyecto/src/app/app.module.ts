@@ -14,7 +14,6 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "./../environments/environment";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 
-import { CartModalPageModule } from "./pages/cart-modal/cart-modal.module";
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
@@ -28,8 +27,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    CartModalPageModule,
-
   ],
   providers: [
     StatusBar,

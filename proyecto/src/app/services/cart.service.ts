@@ -1,29 +1,40 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  amount: number;
-}
-
+ 
 @Injectable({
   providedIn: 'root'
 })
-
 export class CartService {
-  data: Product[] = [
-    { id: 0, name: 'Pizza Salami', price: 8.99, amount: 0 },
-    { id: 1, name: 'Pizza Classic', price: 5.49, amount: 0 },
-    { id: 2, name: 'Sliced Bread', price: 4.99, amount: 0 },
-    { id: 3, name: 'Salad', price: 6.99, amount: 0 }
+ 
+  private data = [
+    {
+      category: 'Pizza',
+      products: [
+        { id: 0, name: 'ejemplo1', price: '8' },
+        { id: 1, name: 'ejemplo1', price: '5' },
+        { id: 2, name: 'ejemplo1', price: '9' },
+        { id: 3, name: 'ejemplo1', price: '7' }
+      ]
+    },
+    {
+      category: 'Pasta',
+      products: [
+        { id: 4, name: 'ejemplo2', price: '8' },
+        { id: 5, name: 'ejemplo2', price: '6' }
+      ]
+    },
+    {
+      category: 'Salad',
+      products: [
+        { id: 6, name: 'ejemplo3', price: '8' },
+        { id: 7, name: 'ejemplo3', price: '5' },
+        { id: 8, name: 'ejemplo3', price: '9' }
+      ]
+    }
   ];
  
   private cart = [];
-  private cartItemCount = new BehaviorSubject(0);
  
-  constructor() {}
+  constructor() { }
  
   getProducts() {
     return this.data;
@@ -33,44 +44,7 @@ export class CartService {
     return this.cart;
   }
  
-  getCartItemCount() {
-    return this.cartItemCount;
-  }
- 
-  addProduct(product:any) {
-    let added = false;
-    for (let p of this.cart) {
-      if (p.id === product.id) {
-        p.amount += 1;
-        added = true;
-        break;
-      }
-    }
-    if (!added) {
-      product.amoun = 1;
-      this.cart.push(product);
-    }
-    this.cartItemCount.next(this.cartItemCount.value + 1);
-  }
- 
-  decreaseProduct(product:any) {
-    for (let [index, p] of this.cart.entries()) {
-      if (p.id === product.id) {
-        p.amount -= 1;
-        if (p.amount == 0) {
-          this.cart.splice(index, 1);
-        }
-      }
-    }
-    this.cartItemCount.next(this.cartItemCount.value - 1);
-  }
- 
-  removeProduct(product:any) {
-    for (let [index, p] of this.cart.entries()) {
-      if (p.id === product.id) {
-        this.cartItemCount.next(this.cartItemCount.value - p.amount);
-        this.cart.splice(index, 1);
-      }
-    }
+  addProduct(product) {
+    this.cart.push(product);
   }
 }

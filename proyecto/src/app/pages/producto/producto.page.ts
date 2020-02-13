@@ -1,83 +1,29 @@
-import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { Category } from "../../shared/category.interface"; 
+import { Component, OnInit } from '@angular/core';
 import { CartService } from "../../services/cart.service";
-import { ModalController } from '@ionic/angular';
-import { CartModalPage } from '../../pages/cart-modal/cart-modal.page';
-import { BehaviorSubject } from 'rxjs';
-import { ProductoService } from "../../services/producto.service";
 @Component({
-  selector: 'app-producto',
+  selector: 'app-productos',
   templateUrl: './producto.page.html',
   styleUrls: ['./producto.page.scss'],
 })
 export class ProductoPage implements OnInit {
-  /////
-  id:any;
-  sub:any;
-  ////
-
-  cart = [];
-  products = [];
-  cartItemCount: BehaviorSubject<number>;
+  selectedItems = [];
  
-  @ViewChild('cart', {static: false, read: ElementRef})fab: ElementRef;
+  total = 0;
  
-  
-  
-  constructor(private activatedRouted:ActivatedRoute,
-    private cartService: CartService, private modalCtrl: ModalController,
-    private productoService:ProductoService
-    ) { }
-  
+  constructor(private cartService: CartService) { }
+ 
   ngOnInit() {
-    ///
-    this.sub=this.activatedRouted.snapshot.paramMap.get('id');
-    /*this.sub = this.activatedRouted.params.subscribe(params => {
-      this.id = params['id'];});*/
-    console.log("idCategoria en Producto: "+this.sub);
-    this.productoService.inService(this.id);
-
-    
-
-    this.products = this.cartService.getProducts();
-    this.cart = this.cartService.getCart();
-    this.cartItemCount = this.cartService.getCartItemCount();
-
-    console.log(this.productoService.getProdutos());
-  }
-
-  addToCart(product) {
-    this.cartService.addProduct(product);
-    this.animateCSS('tada');
-  }
- 
-  async openCart() {
-    this.animateCSS('bounceOutLeft', true);
- 
-    let modal = await this.modalCtrl.create({
-      component: CartModalPage,
-      cssClass: 'cart-modal'
-    });
-    modal.onWillDismiss().then(() => {
-      this.fab.nativeElement.classList.remove('animated', 'bounceOutLeft')
-      this.animateCSS('bounceInLeft');
-    });
-    modal.present();
-  }
- 
-  animateCSS(animationName, keepAnimated = false) {
-    const node = this.fab.nativeElement;
-    node.classList.add('animated', animationName)
-    
-    
-    function handleAnimationEnd() {
-      if (!keepAnimated) {
-        node.classList.remove('animated', animationName);
+    let items = this.cartService.getCart();
+    let selected = {};
+    for (let obj of items) {
+      if (selected[obj.id]) {
+        selected[obj.id].count++;
+      } else {
+        selected[obj.id] = {...obj, count: 1};
       }
-      node.removeEventListener('animationend', handleAnimationEnd)
     }
-    node.addEventListener('animationend', handleAnimationEnd)
+    this.selectedItems = Object.keys(selected).map(key => selected[key])
+    this.total = this.selectedItems.reduce((a, b) => a + (b.count * b.price), 0);
   }
-
+ 
 }
