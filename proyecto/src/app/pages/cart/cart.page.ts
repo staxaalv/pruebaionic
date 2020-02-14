@@ -34,7 +34,9 @@ export class CartPage implements OnInit {
     private catService:CategoriaService) { }
  
   ngOnInit() {
-
+    this.productos=this.asignarPorductosFiltrados("celular");
+    this.categorias=this.asinarCategorias();
+    console.log(this.productos);
     this.items = this.cartService.getProducts();
     this.cart = this.cartService.getCart();
     
@@ -61,6 +63,14 @@ export class CartPage implements OnInit {
         this.productos = res;
       });
     return this.productos;
+  }
+
+  asinarCategorias(){
+    this.catService.getCategorias().subscribe(
+      res =>{
+        this.categorias = res;
+      });
+    return this.categorias;
   }
 
 }
