@@ -34,8 +34,7 @@ export class CartPage implements OnInit {
     private catService:CategoriaService) { }
  
   ngOnInit() {
-    this.productos=this.asignarPorductosFiltrados("celular");
-    console.log(this.productos);
+
     this.items = this.cartService.getProducts();
     this.cart = this.cartService.getCart();
     

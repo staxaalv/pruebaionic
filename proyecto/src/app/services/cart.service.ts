@@ -8,9 +8,6 @@ import { CategoriaService } from './categoria.service';
   providedIn: 'root'
 })
 export class CartService {
-  //private productos:Producto[];
-  //private categorias:Category[];
-  //private extraData=[];
   
   private data = [
     {
@@ -42,29 +39,14 @@ export class CartService {
   private cart = [];
  
   constructor() { 
-    
-    
+      
   }
 
-  /*async llenarProdCat(){
-    
-      this.prodSrv.obtenerLista().then(data => {
-        this.productos=data;
-      });
-      this.catSrv.obtenerLista().then(data => {
-        this.categorias = data;
-      });
-   
-  }*/
  
   getProducts() {
     return this.data;
   }
 
-  /* getExtraProducto(){
-    return this.organizar();
-  }*/
- 
   getCart() {
     return this.cart;
   }
