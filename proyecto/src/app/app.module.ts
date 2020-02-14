@@ -12,13 +12,18 @@ import { AppRoutingModule } from './app-routing.module';
 //import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from "./../environments/environment";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
+//import { AngularFirestoreModule } from "@angular/fire/firestore";
 
-
+//import * as firebase from "firebase";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 
-import { AngularFireModule } from "angularfire2";
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from "angularfire2/firestore";
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+//import { FIREBASECONFIG } from "./../environments/environment";
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,7 +33,9 @@ import { AngularFireModule } from "angularfire2";
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    AngularFirestoreModule.enablePersistence(),
   ],
   providers: [
     StatusBar,

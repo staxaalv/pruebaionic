@@ -14,8 +14,7 @@ import { NavigationExtras } from '@angular/router';
 export class CategoriaPage implements OnInit {
   public categorias:Category[];
 
-  constructor(public categoriaService:CategoriaService,
-    /*public enviarObjService:EnviarObjetoService,*/ public router:Router) { }
+  constructor(public router:Router) { }
 
   ngOnInit() {
     /*this.categoriaService.getallCategories().subscribe(categoria =>
@@ -23,11 +22,11 @@ export class CategoriaPage implements OnInit {
         const data:categoria=categoria.payload.doc.data() as categoria;
         this.categorias.push(data);
       }));*/
-      this.categoriaService.getCategorias().subscribe(
+      /*this.categoriaService.getCategorias().subscribe(
         res =>{
           this.categorias = res;
         });
-
+*/
   }
 
   /*public pasarAProductos(x:any){
@@ -42,8 +41,8 @@ export class CategoriaPage implements OnInit {
     this.router.navigate(['/productos']);
   }*/
 
-  goToProductDetails(id:Category) {
+/*goToProductDetails(id:Category) {
     console.log(id);
     this.router.navigate(['/producto', id]);
-  }
+  }*/
 }

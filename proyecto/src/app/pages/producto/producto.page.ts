@@ -14,6 +14,8 @@ export class ProductoPage implements OnInit {
  
   ngOnInit() {
     let items = this.cartService.getCart();
+    console.log(items);
+    
     let selected = {};
     for (let obj of items) {
       if (selected[obj.id]) {

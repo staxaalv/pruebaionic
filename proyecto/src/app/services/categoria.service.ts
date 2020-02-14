@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 export class CategoriaService {
   private categoriaCollection: AngularFirestoreCollection<Category>;
   private categorias: Observable<Category[]>;
-
+  private listCat:Category[];
 
   constructor(private db:AngularFirestore) {  
     this.categoriaCollection= db.collection<Category>('categoria');
@@ -33,6 +33,11 @@ export class CategoriaService {
   }
   getCategoria(id:string){
     return this.categoriaCollection.doc<Category>(id).valueChanges();
+  }
+
+  async obtenerLista(){
+    const valor = await this.getCategorias().toPromise();
+    return valor;
   }
 
   /*getallCategories(){

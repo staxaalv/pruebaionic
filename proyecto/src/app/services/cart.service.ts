@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
- 
+import{ProductosService} from "../services/productos.service";
+import{Producto} from "../shared/product.interface" 
+import { Category } from "../shared/category.interface";
+import { CategoriaService } from './categoria.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
- 
+  //private productos:Producto[];
+  //private categorias:Category[];
+  //private extraData=[];
+  
   private data = [
     {
       category: 'bebida',
@@ -34,11 +41,29 @@ export class CartService {
  
   private cart = [];
  
-  constructor() { }
+  constructor() { 
+    
+    
+  }
+
+  /*async llenarProdCat(){
+    
+      this.prodSrv.obtenerLista().then(data => {
+        this.productos=data;
+      });
+      this.catSrv.obtenerLista().then(data => {
+        this.categorias = data;
+      });
+   
+  }*/
  
   getProducts() {
     return this.data;
   }
+
+  /* getExtraProducto(){
+    return this.organizar();
+  }*/
  
   getCart() {
     return this.cart;
@@ -47,4 +72,22 @@ export class CartService {
   addProduct(product) {
     this.cart.push(product);
   }
+/*
+   organizar(){
+    for(let cat of this.categorias){
+      let extraProducto=[];
+      for(let prod of this.productos){
+        
+        if(cat.nombre==prod.nombreCat){
+          extraProducto.push({ id:prod.id , name: prod.nombre, price: prod.preciounit });
+        }
+      }
+      this.extraData.push({
+      category: cat.nombre,
+      products: extraProducto
+      });
+    }
+    return this.extraData;
+  }
+*/
 }
