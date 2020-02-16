@@ -3,5 +3,5 @@ export interface Producto{
     imagen:String;
     nombre:String;
     nombreCat:String;
-    preciounit:number;
+    valor:number;
 }

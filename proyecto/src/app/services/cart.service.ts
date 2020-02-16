@@ -9,6 +9,15 @@ import { CategoriaService } from './categoria.service';
 })
 export class CartService {
   
+  public categorias: Category[];
+  public productos: Producto[];
+
+  public cantCategoria:number;
+  public cantProductos:number;
+  
+  public listaTotal=[];
+
+ 
   private data = [
     {
       category: 'bebida',
@@ -38,13 +47,15 @@ export class CartService {
  
   private cart = [];
  
-  constructor() { 
-      
+  constructor(private prodService: ProductosService,
+    private catService: CategoriaService) {
   }
 
  
   getProducts() {
-    return this.data;
+    //return this.data;
+    this.categorias=this.asinarCategorias();
+    return this.listaTotal;
   }
 
   getCart() {
@@ -72,4 +83,45 @@ export class CartService {
     return this.extraData;
   }
 */
+
+asinarCategorias() {
+  this.catService.getCategorias().subscribe(
+    res => {
+      let idprimary=0;
+      this.categorias = res;
+      this.cantCategoria=this.categorias.length;
+      
+      for(var a=0;a<this.cantCategoria;a++){
+        let listaProductos=[];
+        this.prodService.filterBy(this.categorias[a]["nombre"]).subscribe(
+          res => {
+            this.productos = res;
+            
+            
+            this.cantProductos=this.productos.length;
+            
+            for(var b=0;b<this.cantProductos;b++){
+              listaProductos.push( { id: idprimary++, name: this.productos[b]["nombre"] , price: this.productos[b]["valor"] });
+            }
+        });
+        //console.log(listaProductos);
+        this.listaTotal.push({
+          category: this.categorias[a]["nombre"],
+          products: listaProductos});
+
+        //console.log(this.listaTotal);                   
+      }
+
+
+
+
+
+        //this.lista.push({category: this.categorias[x]["nombre"],});
+    });
+  return this.categorias;
+}
+
+
+
+
 }
