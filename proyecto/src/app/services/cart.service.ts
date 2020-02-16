@@ -17,8 +17,9 @@ export class CartService {
   
   public listaTotal=[];
 
+  public idprimary=0;
  
-  private data = [
+  /*private data = [
     {
       category: 'bebida',
       products: [
@@ -43,7 +44,7 @@ export class CartService {
         { id: 8, name: 'ejemplo3', price: '9' }
       ]
     }
-  ];
+  ];*/
  
   private cart = [];
  
@@ -87,7 +88,7 @@ export class CartService {
 asinarCategorias() {
   this.catService.getCategorias().subscribe(
     res => {
-      let idprimary=0;
+      
       this.categorias = res;
       this.cantCategoria=this.categorias.length;
       
@@ -101,7 +102,7 @@ asinarCategorias() {
             this.cantProductos=this.productos.length;
             
             for(var b=0;b<this.cantProductos;b++){
-              listaProductos.push( { id: idprimary++, name: this.productos[b]["nombre"] , price: this.productos[b]["valor"] });
+              listaProductos.push( { id: this.idprimary++, name: this.productos[b]["nombre"] , price: this.productos[b]["valor"],imagen: this.productos[b]["imagen"] });
             }
         });
         //console.log(listaProductos);
