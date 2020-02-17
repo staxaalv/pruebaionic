@@ -11,17 +11,24 @@
   </ion-item>
   <ion-item>
   <ion-label position="floating" > Nombre</ion-label>
-  <ion-input type="text" name="nombre"></ion-input>  
+  <ion-input type="text" name="nombre" [(ngModel)]="user.nombre"></ion-input>  
   </ion-item>
   <ion-item>
     <ion-label position="floating" > Apellido</ion-label>
-    <ion-input type="text" name="apellido"></ion-input>  
+    <ion-input type="text" name="apellido" [(ngModel)]="user.apellido"></ion-input>  
   </ion-item>
-
+  <ion-item>
+    <ion-label position="floating" >Fecha de Nacimiento</ion-label>
+    <ion-input type="text" name="fechanacimiento" [(ngModel)]="user.fechanacimiento"></ion-input>  
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating" >Celular</ion-label>
+    <ion-input type="tel" name="celular" [(ngModel)]="user.celular"></ion-input>  
+  </ion-item>
 
 <ion-item>
   <ion-label position="floating" > Correo electrónico</ion-label>
-  <ion-input type="text" [(ngModel)]="user.email" name="email"></ion-input>
+  <ion-input type="email" [(ngModel)]="user.email" name="email"></ion-input>
 </ion-item>
 <ion-item>
   <ion-label position="floating" > Contraseña</ion-label>

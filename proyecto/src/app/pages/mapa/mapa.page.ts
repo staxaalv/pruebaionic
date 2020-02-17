@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { Geolocation, Geoposition, GeolocationOptions } from '@ionic-native/geolocation/ngx';
+import { NavController,ModalController} from '@ionic/angular';
+//import { Geolocation, Geoposition, GeolocationOptions } from '@ionic-native/geolocation/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 declare var google;
 
 interface Marker {
@@ -20,31 +21,31 @@ interface Marker {
 export class MapaPage implements OnInit {
   map=null;
 
-  lat:number
-  lon:number
-  total:string
+  public lat:number=-2.160103;
+  public lon:number=-79.8856715;
+  total:string;
 
-  constructor(private navController:NavController, private geolocation:Geolocation) { }
+  constructor(private navController:NavController, private geolocation:Geolocation, private modalController:ModalController) { 
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.lat=Number(resp.coords.latitude);
+      this.lon=(resp.coords.longitude);
+      console.log(this.lat+","+this.lon);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+   
+  }
 
   ngOnInit() {
-    this.getGeolocation();
     this.loadMap();
-    console.log("latitud: "+this.lat+"    longitud: "+this.lon)
   }
   
-
-  getGeolocation(){
-    this.geolocation.getCurrentPosition().then((geoposition: Geoposition)=>{
-      this.lat = geoposition.coords.latitude;
-      this.lon = geoposition.coords.longitude;
-    });
-  }
   loadMap() {
-    // create a new map by passing HTMLElement
+   
     const mapEle: HTMLElement = document.getElementById('map');
-    // create LatLng object
+   
     const myLatLng = {lat: this.lat, lng: this.lon};
-    // create map
+   
     this.map = new google.maps.Map(mapEle, {
       center: myLatLng,
       zoom: 12
@@ -60,18 +61,37 @@ export class MapaPage implements OnInit {
         },
         title:"punto 1"
       };
-      this.addMarker(marker);
+      var macador=this.addMarker(marker);
+      
     });
   }
   
   addMarker(marker: Marker) {
-    return new google.maps.Marker({
+    var marcador= new google.maps.Marker({
       position: marker.position,
+      draggable:true,
       map: this.map,
       title: marker.title
+      
+    });
+    marcador.addListener('click', ref=>{
+      this.lon=ref.latLng.lng();
+      this.lat=ref.latLng.lat();
+      console.log("latitud: "+this.lat+"longitud: "+this.lon)
     });
   }
 
+  dismiss() {
+    this.modalController.dismiss({
+      'dismissed': true,
+      "ubicacion": {
+        lat: this.lat,
+        lng: this.lon
+      }
+    });
+  }
+
+  
 
 
 }

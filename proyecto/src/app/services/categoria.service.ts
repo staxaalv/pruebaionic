@@ -39,17 +39,5 @@ export class CategoriaService {
     const valor = await this.getCategorias().toPromise();
     return valor;
   }
-
-  /*getallCategories(){
-    return this.db.collection('categoria').snapshotChanges();
-  }*/
-
-  /*getAllCategories(){
-    return this.db.collection('categoria').snapshotChanges().pipe(map(rooms => {
-      return rooms.map(a =>{
-        const data = a.payload.doc.data() as Category;
-        data.id = a.payload.doc.id;
-        return data;
-      })
-    }));*/
+  
   }

@@ -18,34 +18,7 @@ export class CartService {
   public listaTotal=[];
 
   public idprimary=0;
- 
-  /*private data = [
-    {
-      category: 'bebida',
-      products: [
-        { id: 0, name: 'ejemplo1', price: '8' },
-        { id: 1, name: 'ejemplo1', price: '5' },
-        { id: 2, name: 'ejemplo1', price: '9' },
-        { id: 3, name: 'ejemplo1', price: '7' }
-      ]
-    },
-    {
-      category: 'computador',
-      products: [
-        { id: 4, name: 'ejemplo2', price: '8' },
-        { id: 5, name: 'ejemplo2', price: '6' }
-      ]
-    },
-    {
-      category: 'celular',
-      products: [
-        { id: 6, name: 'ejemplo3', price: '8' },
-        { id: 7, name: 'ejemplo3', price: '5' },
-        { id: 8, name: 'ejemplo3', price: '9' }
-      ]
-    }
-  ];*/
- 
+  
   private cart = [];
  
   constructor(private prodService: ProductosService,
@@ -115,7 +88,7 @@ asinarCategorias() {
             this.cantProductos=this.productos.length;
             
             for(var b=0;b<this.cantProductos;b++){
-              listaProductos.push( { id: this.idprimary++, name: this.productos[b]["nombre"] , price: this.productos[b]["valor"],imagen: this.productos[b]["imagen"] });
+              listaProductos.push( { id: this.idprimary++, name: this.productos[b]["nombre"] , price: this.productos[b]["valor"],imagen: this.productos[b]["imagen"], productoId:this.productos[b]["id"] });
             }
         });
         //console.log(listaProductos);
@@ -125,11 +98,6 @@ asinarCategorias() {
 
         //console.log(this.listaTotal);                   
       }
-
-
-
-
-
         //this.lista.push({category: this.categorias[x]["nombre"],});
     });
   return this.categorias;

@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { AuthService} from "../app/services/auth.service"
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -27,14 +28,9 @@ export class AppComponent {
       icon: 'cart'
     },
     {
-      title: 'Cerrar Sesion',
-      url: '/login',
-      icon: 'log-out'
-    },
-    {
-      title: 'PruebaFirebase',
-      url: '/categoria',
-      icon: 'google'
+      title: 'Ver Historial de Compras',
+      url: '/historial',
+      icon: 'basket'
     }
     
   ];
@@ -42,7 +38,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private authService: AuthService
   ) {
     this.initializeApp();
   }
@@ -52,5 +49,9 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  cerrarSesion(){
+    this.authService.logout();
   }
 }

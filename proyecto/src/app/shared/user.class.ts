@@ -4,4 +4,5 @@ export class User{
     fechanacimiento:string;
     email:string;
     password:string;
+    nombre:string;
 }

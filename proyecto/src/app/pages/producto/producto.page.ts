@@ -1,18 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from "../../services/cart.service";
-import { listChanges } from 'angularfire2/database';
+import{ModalMapComponent} from "../../modals/modal-map/modal-map.component"
+import {EnviarFacturaService}from "../../services/enviar-factura.service"
+import { Historial } from "../../shared/historial.interface";
 @Component({
   selector: 'app-productos',
   templateUrl: './producto.page.html',
   styleUrls: ['./producto.page.scss'],
 })
+
 export class ProductoPage implements OnInit {
   selectedItems = [];
  public dscPorcentaje=0;
   total = 0;
   iva =0;
   subtotal=0;
-  constructor(private cartService: CartService) { }
+  
+  public lat:number;
+  public lon:number
+  public receivedChildMessage:any;
+  public MAPAPIKEY="AIzaSyCvfIdW0WuMF0LP9t36hbJXFk1TrHw9E2g";
+  public marker=`color:orange%7C${this.lat},${this.lon}`;
+  public urlStMap=`https://maps.googleapis.com/maps/api/staticmap?center=${this.lat},${this.lon}&zoom=15&size=200x200&maptype=roadmap&markers=${this.marker}&key=${this.MAPAPIKEY}`;
+
+  public idUser="jAYHRrearyOdhFUvbys3EbrWvOB3";
+  
+  public pedido:Historial={
+    clienteid: "",
+    descuento:0,
+    fecha:new Date(),
+    productos:[]
+  };
+
+  constructor(private cartService: CartService, private envFactServ:EnviarFacturaService ) { 
+
+  }
  
   ngOnInit() {
     let items = this.cartService.getCart();
@@ -68,5 +90,30 @@ export class ProductoPage implements OnInit {
   calcularTotal(){
     return this.subtotal+this.iva-this.dscPorcentaje;
   }
- 
+  
+  public getMessage(message: any) {
+    this.receivedChildMessage = message;
+    this.lat=this.receivedChildMessage.ubicacion.lat;
+    this.lon=this.receivedChildMessage.ubicacion.lng;
+  }
+
+  public subirPedido(){
+    this.pedido.clienteid=this.idUser;
+    this.pedido.descuento=this.dscPorcentaje;
+    this.pedido.fecha=new Date();
+    let temp=[];
+    for(let item of this.selectedItems ){
+      //console.log({idProducto:item.productoId,cantidad:item.count});
+      temp.push({idProducto:item.productoId,cantidad:item.count})
+    }
+    this.pedido.productos=temp;
+    console.log(this.pedido);
+    var x=this.envFactServ.guardarPedido(this.pedido);
+    if(x){
+      console.log("se logro guardar el pedido");
+    }
+  }
+
+  
+  
 }

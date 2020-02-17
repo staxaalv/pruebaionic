@@ -51,7 +51,7 @@ export class CartPage implements OnInit {
   }
 
   openCart() {
-    this.router.navigate(['producto']);
+    this.router.navigate(['/producto']);
   }
 
   /*asignarPorductosFiltrados(variable: string) {

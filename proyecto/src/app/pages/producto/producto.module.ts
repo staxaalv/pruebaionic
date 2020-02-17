@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { ProductoPageRoutingModule } from './producto-routing.module';
 
 import { ProductoPage } from './producto.page';
-
+import { ModalModuleModule } from "./../../modals/modal-module/modal-module.module";
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProductoPageRoutingModule
+    ProductoPageRoutingModule,
+    ModalModuleModule
   ],
   declarations: [ProductoPage]
 })

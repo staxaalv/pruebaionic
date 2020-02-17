@@ -38,7 +38,7 @@ export class ProductosService {
   }
   
   filterBy(categoriFilt: string) {
-
+    
     //this.db.list('/candidates_list', ref => ref.orderByChild('email').equalTo('pranavkeke@gmail.com'));
     this.productosFiltrados = this.db.collection<Producto>('elementos', ref => ref.where('nombreCat','==', categoriFilt)).snapshotChanges().pipe(
       map(actions=>{
@@ -51,7 +51,7 @@ export class ProductosService {
       );
 
     return this.productosFiltrados;
-  };
+  }//;
 
 }
 

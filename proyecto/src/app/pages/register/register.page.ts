@@ -14,9 +14,14 @@ export class RegisterPage implements OnInit {
   ngOnInit() {}
 
   async onRegister(){
-    const user=await this.authService.onRegister(this.user);
-    if(user){
-      console.log('usuario a sido creado');
+    const userx=await this.authService.onRegister(this.user);
+    if(userx){
+      console.log('usuario a sido creado '+userx.user.uid);
+      
+      const userdb=await this.authService.guardarDb(this.user,userx.user.uid);
+      if(userdb!=null){
+        console.log("usuario ha sido agregado a la base de datos");
+      }
       this.router.navigateByUrl('/home');
     }
   }

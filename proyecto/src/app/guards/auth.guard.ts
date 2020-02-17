@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-
+import { AngularFireAuth } from "@angular/fire/auth";
 import {AuthService} from "../services/auth.service";
 import { Router } from "@angular/router";
+import { map } from 'rxjs/operators';
+import { isNullOrUndefined } from 'util';
+import { NavController} from "@ionic/angular";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  
+  constructor(/*private authService: AuthService,private router:Router,*/private aFAuth:AngularFireAuth,private navController:NavController){}
 
-  constructor(private authService: AuthService,private router:Router){}
-
-  canActivate(next: ActivatedRouteSnapshot,state: RouterStateSnapshot): 
+  /*canActivate(next: ActivatedRouteSnapshot,state: RouterStateSnapshot): 
     | Observable<boolean | UrlTree> 
     | Promise<boolean | UrlTree> 
     | boolean 
@@ -24,6 +28,16 @@ export class AuthGuard implements CanActivate {
     this.router.navigateByUrl('/login');
     return false;
     //return true;
+  }*/
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+    return this.aFAuth.authState.pipe(map(auth => {
+      if (isNullOrUndefined(auth)) {
+        return true;
+      }
+      this.navController.navigateRoot("/home");
+      return false;
+    }));
   }
+
   
 }

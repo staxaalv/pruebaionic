@@ -16,8 +16,11 @@
       </ion-button>
       <ion-label slot="end" text-right>{{ (item.price * item.count) | currency:'USD':'symbol' }}</ion-label>
     </ion-item>
+
+    <img src="{{urlStMap}}">
    
   </ion-list>
+  <app-modal-map (messageToEmit)="getMessage($event)" ></app-modal-map>
 </ion-content>
 <ion-footer>
   <ion-item>
@@ -32,8 +35,9 @@
   <ion-item>
     Total:<span slot="end">{{ total | currency:'USD':'symbol' }}</span>
   </ion-item>
+ 
   <ion-item text-center>
-    <ion-button >
+    <ion-button (click)="subirPedido()" >
       Subir Factura
     </ion-button>
   </ion-item>
