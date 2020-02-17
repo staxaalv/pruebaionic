@@ -42,7 +42,7 @@ export class CartPage implements OnInit {
     this.items = this.cartService.getProducts();
     this.cart = this.cartService.getCart();
     
-    console.log(this.items);
+    //console.log(this.items);
     //console.log(this.listaTotal);
   }
 

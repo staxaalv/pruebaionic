@@ -66,6 +66,19 @@ export class CartService {
   addProduct(product) {
     this.cart.push(product);
   }
+  deleteProduct(prodId){
+    console.log("ID DE PRODUCTO= "+prodId+"  cartlength="+this.cart.length);
+    console.log(this.cart);
+    let x=0;
+    for( x=0;x<this.cart.length;x++){
+      if (this.cart[x].id==prodId){
+        this.cart.splice(x,1);
+        x=0;
+        console.log("cart size= "+this.cart.length+"posicion x"+x);
+      }
+    }
+    console.log(this.cart);
+  }
 /*
    organizar(){
     for(let cat of this.categorias){
