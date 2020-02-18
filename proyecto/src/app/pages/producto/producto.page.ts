@@ -3,6 +3,7 @@ import { CartService } from "../../services/cart.service";
 import{ModalMapComponent} from "../../modals/modal-map/modal-map.component"
 import {EnviarFacturaService}from "../../services/enviar-factura.service"
 import { Historial } from "../../shared/historial.interface";
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-productos',
   templateUrl: './producto.page.html',
@@ -16,6 +17,8 @@ export class ProductoPage implements OnInit {
   iva =0;
   subtotal=0;
   
+  cantidad=0;
+  
   public lat:number=0;
   public lon:number=0;
   public receivedChildMessage:any;
@@ -23,7 +26,7 @@ export class ProductoPage implements OnInit {
   public marker="color:orange%7C"+this.lat+","+this.lon;
   public urlStMap="https://maps.googleapis.com/maps/api/staticmap?center="+this.lat+","+this.lon+"&zoom=15&size=200x200&maptype=roadmap&markers="+this.marker+"&key="+this.MAPAPIKEY;
 
-  public idUser="jAYHRrearyOdhFUvbys3EbrWvOB3";
+  public idUser="";
   
   public pedido:Historial={
     clienteid: "",
@@ -33,11 +36,13 @@ export class ProductoPage implements OnInit {
     totalPago:0
   };
 
-  constructor(private cartService: CartService, private envFactServ:EnviarFacturaService ) { 
+  constructor(private cartService: CartService, private envFactServ:EnviarFacturaService,
+    private storage:Storage) { 
 
   }
  
   ngOnInit() {
+    this.storage.get('userUid').then(data=> {this.idUser=data});
     let items = this.cartService.getCart();
     let selected = {};
     for (let obj of items) {

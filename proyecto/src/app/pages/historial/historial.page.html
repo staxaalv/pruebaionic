@@ -1,9 +1,37 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>historial</ion-title>
+  <ion-item slot="start">
+    <button routerLink="/home">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-item>
+  <ion-toolbar>
+    <ion-title>Historial</ion-title>
   </ion-toolbar>
+</ion-toolbar>
 </ion-header>
 
 <ion-content>
+<ion-list *ngFor="let pedido of pedidos; let i=index;">
+  <ion-item>
+    <ion-avatar class="clase1" slot="start">
+      {{i+1}}
+    </ion-avatar>
+    <ion-label>
+      <h2>{{pedido.fecha |date : 'dd/MM/yyyy'}}</h2>
+      <h3>Total de Factura: {{pedido.totalPago | currency:'USD':'symbol' }}</h3>
+      <h4>
+        <p>Cant:      Nombre</p>
+        <ion-list *ngFor="let producto of pedido.productos">
+          <ion-item>
+            <p>
+              {{producto.cantidad}} : {{producto.nombreProducto}}
+            </p>
+          </ion-item>
+        </ion-list>
+      </h4>
+    </ion-label>
+  </ion-item>
+</ion-list>
 
 </ion-content>

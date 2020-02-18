@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore,AngularFirestoreCollection } from "angularfire2/firestore";
 import { Historial } from "../shared/historial.interface";
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,20 +27,25 @@ export class EnviarFacturaService {
   }
 
   filtrarporUsuario(userFilt: string) {
-    //this.historialesFiltrados=this.db.collection<Historial>('clienteid')
-    
-    /*this.productosFiltrados = this.db.collection<Producto>('elementos', ref => ref.where('nombreCat','==', categoriFilt)).snapshotChanges().pipe(
+    return this.db.collection<Historial>('historial', ref => ref.where('clienteid','==', userFilt)).snapshotChanges().pipe(
       map(actions=>{
+        console.log(actions)
         return actions.map(a=>{
-          const data=a.payload.doc.data();
-          const id=a.payload.doc.id;
-          return { id, ...data}
+          console.log(a)
+          let data:any=a.payload.doc.data();
+          let variable={id:a.payload.doc.id,
+                        clienteid:data.clienteid,
+                        descuento:data.descuento,
+                        fecha:new Date(data.fecha.seconds*1000),
+                        productos:data.productos,
+                        totalPago:data.totalPago
+                        };
+          console.log(typeof(data.fecha.seconds))
+          console.log(data.fecha.seconds)
+          return variable;
           });
-        })
-      );
-
-    return this.productosFiltrados;*/
-  }
+        }));
+    }
 
   
 

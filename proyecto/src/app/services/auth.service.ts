@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import {User} from "../shared/user.class";
 import { AngularFirestore, } from 'angularfire2/firestore';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -46,6 +47,7 @@ export class AuthService {
     let id:string;
     try {
       return await this.afAuth.auth.createUserWithEmailAndPassword(user.email,user.password);
+      this.logout();
       
     } catch (error) {
       console.log('ERROR EN REGISTER: ',error)
@@ -69,4 +71,29 @@ export class AuthService {
     }
     return null
   }
+
+  getDbUser(id:string){
+    return this.db.collection<User>('usuario').doc(id).valueChanges();
+  }
+
+  /*filtrarporUsuario(userFilt: string) {
+    return this.db.collection<User>('historial', ref => ref.where('clienteid','==', userFilt)).snapshotChanges().pipe(
+      map(actions=>{
+        console.log(actions)
+        return actions.map(a=>{
+          console.log(a)
+          let data:any=a.payload.doc.data();
+          let variable={id:a.payload.doc.id,
+                        clienteid:data.clienteid,
+                        descuento:data.descuento,
+                        fecha:new Date(data.fecha.seconds*1000),
+                        productos:data.productos,
+                        totalPago:data.totalPago
+                        };
+          console.log(typeof(data.fecha.seconds))
+          console.log(data.fecha.seconds)
+          return variable;
+          });
+        }));
+    }*/
 }

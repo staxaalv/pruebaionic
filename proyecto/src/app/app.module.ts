@@ -12,6 +12,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule, FirestoreSettingsToken } from "@angular/fire/firestore";
+
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -24,6 +27,7 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from "@angular/fire/fi
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFirestoreModule.enablePersistence(),
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,

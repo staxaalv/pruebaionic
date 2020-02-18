@@ -13,7 +13,7 @@
   <ion-card class="welcome-card">
     <img src="/assets/shapes.svg" alt=""/>
     <ion-card-header>
-      <ion-card-title text-center>Bienvenido a la Aplicación</ion-card-title>
+      <ion-card-title text-center>Bienvenido {{nombre}} {{apellido}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <p>
@@ -21,4 +21,9 @@
       </p>
     </ion-card-content>
   </ion-card>
+  <div class="extra" >
+  <h3 >Correo: {{email}}</h3>
+  <h3>Celular: {{celular}}</h3>
+  <h3>Fecha de Nacimiento: {{fechanacimiento}}</h3>
+</div>
 </ion-content>

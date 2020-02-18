@@ -103,7 +103,9 @@ asinarCategorias() {
   return this.categorias;
 }
 
-
+elminartodoCarrito(){
+  delete this.cart;
+}
 
 
 }
