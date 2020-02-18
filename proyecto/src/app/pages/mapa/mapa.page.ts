@@ -74,7 +74,7 @@ export class MapaPage implements OnInit {
       title: marker.title
       
     });
-    marcador.addListener('click', ref=>{
+    marcador.addListener('dragend', ref=>{
       this.lon=ref.latLng.lng();
       this.lat=ref.latLng.lat();
       //console.log("latitud: "+this.lat+"longitud: "+this.lon)

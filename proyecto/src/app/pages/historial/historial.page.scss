@@ -4,3 +4,12 @@
 .clase2{
     font: x-small ;
 }
+
+.sinBordes{
+    --border-style: none !important;
+}
+.indice{
+    margin-top: 5px;
+    margin-left: 10px;
+    position: absolute;
+}
