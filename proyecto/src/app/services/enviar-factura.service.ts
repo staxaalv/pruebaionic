@@ -10,6 +10,7 @@ export class EnviarFacturaService {
   
   private historialCollection: AngularFirestoreCollection<Historial>;
   private historiales: Observable<Historial[]>;
+  private historialesFiltrados:Observable<Historial[]>;
   
   constructor(public db :AngularFirestore) { 
     this.historialCollection= db.collection<Historial>('categoria');
@@ -25,8 +26,8 @@ export class EnviarFacturaService {
   }
 
   filtrarporUsuario(userFilt: string) {
-        
-    //this.db.list('/candidates_list', ref => ref.orderByChild('email').equalTo('pranavkeke@gmail.com'));
+    //this.historialesFiltrados=this.db.collection<Historial>('clienteid')
+    
     /*this.productosFiltrados = this.db.collection<Producto>('elementos', ref => ref.where('nombreCat','==', categoriFilt)).snapshotChanges().pipe(
       map(actions=>{
         return actions.map(a=>{

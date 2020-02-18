@@ -46,7 +46,7 @@ export class CartService {
     for( x=0;x<this.cart.length;x++){
       if (this.cart[x].id==prodId){
         this.cart.splice(x,1);
-        x=0;
+        x=-1;
         console.log("cart size= "+this.cart.length+"posicion x"+x);
       }
     }

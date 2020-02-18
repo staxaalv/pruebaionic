@@ -16,12 +16,12 @@ export class ProductoPage implements OnInit {
   iva =0;
   subtotal=0;
   
-  public lat:number;
-  public lon:number
+  public lat:number=0;
+  public lon:number=0;
   public receivedChildMessage:any;
   public MAPAPIKEY="AIzaSyCvfIdW0WuMF0LP9t36hbJXFk1TrHw9E2g";
-  public marker=`color:orange%7C${this.lat},${this.lon}`;
-  public urlStMap=`https://maps.googleapis.com/maps/api/staticmap?center=${this.lat},${this.lon}&zoom=15&size=200x200&maptype=roadmap&markers=${this.marker}&key=${this.MAPAPIKEY}`;
+  public marker="color:orange%7C"+this.lat+","+this.lon;
+  public urlStMap="https://maps.googleapis.com/maps/api/staticmap?center="+this.lat+","+this.lon+"&zoom=15&size=200x200&maptype=roadmap&markers="+this.marker+"&key="+this.MAPAPIKEY;
 
   public idUser="jAYHRrearyOdhFUvbys3EbrWvOB3";
   
@@ -29,7 +29,8 @@ export class ProductoPage implements OnInit {
     clienteid: "",
     descuento:0,
     fecha:new Date(),
-    productos:[]
+    productos:[],
+    totalPago:0
   };
 
   constructor(private cartService: CartService, private envFactServ:EnviarFacturaService ) { 
@@ -47,8 +48,8 @@ export class ProductoPage implements OnInit {
       }
     }
    
-    this.selectedItems = Object.keys(selected).map(key => selected[key])
-
+    this.selectedItems = Object.keys(selected).map(key => selected[key]);
+    console.log(this.selectedItems);
     this.subtotal = this.selectedItems.reduce((a, b) => a + (b.count * b.price), 0);
     this.iva=this.subtotal*12/100;
     this.dscPorcentaje=(this.randomInt(0,30))*this.subtotal/100;
@@ -92,19 +93,28 @@ export class ProductoPage implements OnInit {
   }
   
   public getMessage(message: any) {
+    
     this.receivedChildMessage = message;
     this.lat=this.receivedChildMessage.ubicacion.lat;
     this.lon=this.receivedChildMessage.ubicacion.lng;
+    
+    this.marker="color:orange%7C"+this.lat+","+this.lon;
+    this.urlStMap="https://maps.googleapis.com/maps/api/staticmap?center="+this.lat+","+this.lon+"&zoom=15&size=200x200&maptype=roadmap&markers="+this.marker+"&key="+this.MAPAPIKEY;
+    
   }
 
   public subirPedido(){
     this.pedido.clienteid=this.idUser;
     this.pedido.descuento=this.dscPorcentaje;
     this.pedido.fecha=new Date();
+    this.pedido.totalPago=this.total;
     let temp=[];
     for(let item of this.selectedItems ){
       //console.log({idProducto:item.productoId,cantidad:item.count});
-      temp.push({idProducto:item.productoId,cantidad:item.count})
+      temp.push({idProducto:item.productoId,
+                 cantidad:item.count,
+                 nombreProducto:item.name
+                });
     }
     this.pedido.productos=temp;
     console.log(this.pedido);

@@ -29,7 +29,7 @@ export class MapaPage implements OnInit {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.lat=Number(resp.coords.latitude);
       this.lon=(resp.coords.longitude);
-      console.log(this.lat+","+this.lon);
+      //console.log(this.lat+","+this.lon);
     }).catch((error) => {
       console.log('Error getting location', error);
     });
@@ -77,7 +77,7 @@ export class MapaPage implements OnInit {
     marcador.addListener('click', ref=>{
       this.lon=ref.latLng.lng();
       this.lat=ref.latLng.lat();
-      console.log("latitud: "+this.lat+"longitud: "+this.lon)
+      //console.log("latitud: "+this.lat+"longitud: "+this.lon)
     });
   }
 

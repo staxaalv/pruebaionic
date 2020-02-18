@@ -3,4 +3,5 @@ export interface Historial{
     descuento:number;
     fecha:Date;
     productos:any[];
+    totalPago:number;
 }
