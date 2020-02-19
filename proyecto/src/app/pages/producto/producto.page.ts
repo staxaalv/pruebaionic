@@ -83,6 +83,30 @@ export class ProductoPage implements OnInit {
     
  }
 
+ incrementarSelectedItem(item){
+   console.log(item);
+   item.count=item.count+1;
+   this.subtotal=this.calcularSubtotal();
+    this.iva=this.calcularIVA();
+    this.dscPorcentaje=this.calcularDescuento();
+    this.total=this.calcularTotal();
+    this.cartService.incrementProduct(item.id);
+   
+ }
+ disminuirSelectedItem(item){
+  console.log(item);
+  if(item.count==1){}
+  else{
+    item.count=item.count-1;
+    this.cartService.decressProduct(item.id);
+  }
+  this.subtotal=this.calcularSubtotal();
+  this.iva=this.calcularIVA();
+  this.dscPorcentaje=this.calcularDescuento();
+  this.total=this.calcularTotal();
+  
+ }
+
  calcularIVA(){
   return this.subtotal*12/100;
   }
@@ -126,6 +150,13 @@ export class ProductoPage implements OnInit {
     var x=this.envFactServ.guardarPedido(this.pedido);
     if(x){
       console.log("se logro guardar el pedido");
+      this.selectedItems = [];
+      this.dscPorcentaje=0;
+      this.total = 0;
+      this.iva =0;
+      this.subtotal=0;
+      this.cantidad=0;
+      this.cartService.elminartodoCarrito();
     }
   }
 

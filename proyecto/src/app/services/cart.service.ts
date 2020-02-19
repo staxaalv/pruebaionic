@@ -52,6 +52,34 @@ export class CartService {
     }
     console.log(this.cart);
   }
+
+  decressProduct(prodId){
+    console.log("ID DE PRODUCTO= "+prodId+"  cartlength="+this.cart.length);
+    console.log(this.cart);
+    let x=0;
+    for( x=0;x<this.cart.length;x++){
+      if (this.cart[x].id==prodId){
+        this.cart.splice(x,1);
+        break;
+      }
+    }
+    console.log("ID DE PRODUCTO= "+prodId+"  cartlength="+this.cart.length);
+    console.log(this.cart);
+  }
+
+  incrementProduct(prodId){
+    console.log("ID DE PRODUCTO= "+prodId+"  cartlength="+this.cart.length);
+    console.log(this.cart);
+    let x=0;
+    for( x=0;x<this.cart.length;x++){
+      if (this.cart[x].id==prodId){
+        this.cart.push(this.cart[x]);
+        break;
+      }
+    }
+    console.log("ID DE PRODUCTO= "+prodId+"  cartlength="+this.cart.length);
+    console.log(this.cart);
+  }
 /*
    organizar(){
     for(let cat of this.categorias){
@@ -104,7 +132,7 @@ asinarCategorias() {
 }
 
 elminartodoCarrito(){
-  delete this.cart;
+  this.cart.splice(0,(this.cart.length));
 }
 
 
